@@ -4,40 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Undo {
-    private static final Undo undo;
+	// final ---> no canvia un cop inicialitzat
+	private static final Undo undo;
 
-    static {
-        undo = new Undo();
-    }
+	// bloc static ---> s'executa un cop carregada la classe
+	static {
+		undo = new Undo();
+	}
 
-    private Undo() {
-        System.out.println("Instanciació");
-    }
+	// constructor privat ---> no s'instancia des de fora de la classe
+	private Undo() {
+		System.out.println("Instanciació");
+	}
 
-    public static Undo getInstance(){
-        return undo;
-    }
+	// recuperar la instància
+	public static Undo getInstance() {
+		return undo;
+	}
 
-    private List<String> comandes = new ArrayList<String>();
+	// llista de comandes disponible para undo ////////////
 
-    public void afegirComanda(String comanda) {
-        this.comandes.add(comanda);
-    }
+	private List<String> comandes = new ArrayList<String>();
 
-    public void eliminarComanda(String comanda) {
-        this.comandes.remove(comanda);
-    }
+	public void afegirComanda(String comanda) {
+		System.out.println("---- " + comanda + " afegit----");
+		this.comandes.add(0, comanda);
+	}
 
-    public void llistar() {
-        System.out.println("llistar les últimes comandes introduïdes:");
-        for (int i = comandes.size() - 1; i >= 0; i--) {
-            System.out.println(comandes.get(i));
-        }
-    }
+	public void eliminarComanda() {
+		String comanda = this.comandes.get(0);
+		System.out.println("---------- Undo " + comanda + "----------");
+		this.comandes.remove(0);// remove(comanda)
+	}
 
+	public void llistar() {
+		System.out.println("--- llista de les últimes (deu) comandes --");
+		if (comandes.size() >= 10) {
+			for (int i = 0; i < 10; i++) {
+				System.out.println(comandes.get(i));
+			}
 
+		} else {
+			comandes.forEach(System.out::println);
+		}
 
-
+	}
 
 }
-
