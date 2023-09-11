@@ -4,12 +4,12 @@ public class USAddressPhoneFactory implements AddressPhoneFactory{
 
 	@Override
 	public Address createAddress() {
-		return new ESAddress();
+		return new USAddress();
 	}
 
 	@Override
 	public PhoneNumber createPhoneNumber() {
-		return new ESPhoneNumber();
+		return new USPhoneNumber();
 
 	}
 

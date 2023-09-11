@@ -7,8 +7,7 @@ public class ESAddress extends Address {
 
 	@Override
 	public String getCountry() {
-		// TODO Auto-generated method stub
-		return null;
+		return COUNTRY;
 	}
 
 	public String getFullAddress() {
