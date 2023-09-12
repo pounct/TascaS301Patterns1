@@ -1,26 +1,17 @@
 package abstract_factory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+	public static Scanner sc = new Scanner(System.in);
+	static ArrayList<Contacte> contactes = new ArrayList<Contacte>();
 
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-
-		// List<String> contactes = new ArrayList<String>();
-		Map<String, AddressPhoneFactory> contactes = new HashMap<String, AddressPhoneFactory>();
-
 		boolean programOn = true;
-		ArrayList<String> comandes = new ArrayList<>();
-		ArrayList<String> nomContactes = new ArrayList<>();
-
-		int comptador = 1;
-
+		Byte opcio;
 		while (programOn) {
 			System.out.println();
 			System.out.println("--------------------------------------------------");
@@ -29,48 +20,108 @@ public class Main {
 			System.out.println("--------------------------------------------------");
 			System.out.println("1. nou contacte US.");
 			System.out.println("2. nou contacte ES.");
-			System.out.println("3. llistar les últimes comandes introduïdes:");
+			System.out.println("3. lista contactes.");
 			System.out.println("0. fin");
-		}
+			opcio = sc.nextByte();
+			sc.nextLine();
 
+			switch (opcio) {
+			case 1:
+				nouContacteUS();
+				break;
+			case 2:
+				nouContacteES();
+				break;
+			case 3:
+				listaContactes();
+				break;
+			case 0:
+				programOn = false;
+				System.out.println("      Fin de programe.");
+				break;
+
+			default:
+				break;
+			}
+		}
+		sc.close();
 	}
 
-	public void nouContacteUS() {
+	public static void listaContactes() {
+		contactes.forEach(System.out::println);
+	}
+
+	public static void nouContacteUS() {
 		System.out.println(" Nou contacte US.");
 		System.out.println(" Nom Contacte :");
+		String nomContacte = sc.nextLine();
 		AddressPhoneFactory addressPhoneFactory = new USAddressPhoneFactory();
 		Address adress = addressPhoneFactory.createAddress();
-		//getStreet 
+		// getStreet
 		System.out.println(" Street :");
-		//getCity 
+		adress.setStreet(sc.nextLine());
+		// getCity
 		System.out.println(" City  :");
-		//getRegion  
+		adress.setCity(sc.nextLine());
+		// getRegion
 		System.out.println(" Region :");
-		//getPostalCode  
+		adress.setRegion(sc.nextLine());
+		// getPostalCode
 		System.out.println(" PostalCode :");
-		//getCOUNTRY 
-		System.out.println(" COUNTRY : ");
-		
+		adress.setPostalCode(sc.nextLine());
+		// getCOUNTRY
+		System.out.println(" COUNTRY : " + adress.getCountry());
+
 		System.out.println(" Address complete");
 		System.out.println(adress.getFullAddress());
-		
+
 		PhoneNumber phoneNumber = addressPhoneFactory.createPhoneNumber();
 		// getPhoneNumber
 		System.out.println(" Phone Number : ");
-		phoneNumber.setPhoneNumber(null);
+		phoneNumber.setPhoneNumber(sc.nextLine());
+		Contacte contacte = new Contacte();
+		contacte.setNom(nomContacte);
+		contacte.setAddress(adress);
+		contacte.setPhoneNumber(phoneNumber);
+
+		contactes.add(contacte);
 
 	}
 
-//	public void entrarNombre() {
-//
-//	}
-//
-//	public void entrarAddress() {
-//
-//	}
-//
-//	public void entrarPhone() {
-//
-//	}
+	public static void nouContacteES() {
+		System.out.println(" Nou contacte ES.");
+		System.out.println(" Nom Contacte :");
+		String nomContacte = sc.nextLine();
+		AddressPhoneFactory addressPhoneFactory = new ESAddressPhoneFactory();
+		Address adress = addressPhoneFactory.createAddress();
+		// getStreet
+		System.out.println(" Street :");
+		adress.setStreet(sc.nextLine());
+		// getCity
+		System.out.println(" City  :");
+		adress.setCity(sc.nextLine());
+		// getRegion
+		System.out.println(" Region :");
+		adress.setRegion(sc.nextLine());
+		// getPostalCode
+		System.out.println(" PostalCode :");
+		adress.setPostalCode(sc.nextLine());
+		// getCOUNTRY
+		System.out.println(" COUNTRY : " + adress.getCountry());
+
+		System.out.println(" Address complete");
+		System.out.println(adress.getFullAddress());
+
+		PhoneNumber phoneNumber = addressPhoneFactory.createPhoneNumber();
+		// getPhoneNumber
+		System.out.println(" Phone Number : ");
+		phoneNumber.setPhoneNumber(sc.nextLine());
+
+		Contacte contacte = new Contacte();
+		contacte.setNom(nomContacte);
+		contacte.setAddress(adress);
+		contacte.setPhoneNumber(phoneNumber);
+		contactes.add(contacte);
+	}
 
 }

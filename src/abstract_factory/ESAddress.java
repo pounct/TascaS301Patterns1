@@ -2,7 +2,7 @@ package abstract_factory;
 
 public class ESAddress extends Address {
 
-	private static final String COUNTRY = "UNITED STATES";
+	private static final String COUNTRY = "SPAIN";
 	private static final String COMMA = ",";
 
 	@Override

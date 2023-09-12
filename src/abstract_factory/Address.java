@@ -26,12 +26,7 @@ public abstract class Address {
 	}
 
 	public abstract String getCountry();
-
-//	public String getFullAddress() {
-//		return street + EOL_STRING + city + SPACE + postalCode + EOL_STRING;
-//	}
-	public abstract String getFullAddress();
-
+	
 	public void setStreet(String newStreet) {
 		street = newStreet;
 	}
@@ -47,5 +42,7 @@ public abstract class Address {
 	public void setPostalCode(String newPostalCode) {
 		postalCode = newPostalCode;
 	}
+	
+	public abstract String getFullAddress();
 
 }
